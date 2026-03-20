@@ -203,6 +203,15 @@ const MenuCategories = () => {
     return matchesSearch && matchesFilter;
   });
 
+  const getMenuItemImage = (item) => {
+    if (item.image && /\.(png|jpe?g|svg)$/i.test(item.image)) return item.image;
+    if (item.category === 'Biryani') return heroBiryani;
+    if (item.category === 'Appetizers') return chickenTikka;
+    if (item.category === 'Dessert') return rasmalai;
+    if (item.category === 'Combos') return muttonBiryani;
+    return heroBiryani;
+  };
+
   return (
     <section id="menu" className="section-padding bg-bg-main">
       <div className="container">
@@ -262,7 +271,7 @@ const MenuCategories = () => {
                         className="group bg-secondary/20 rounded-[40px] overflow-hidden border border-white/5 hover:border-primary/50 transition-all shadow-3xl hover:-translate-y-2"
                     >
                         <div className="relative aspect-[4/3] overflow-hidden">
-                           <img src={item.image} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                           <img src={getMenuItemImage(item)} alt={item.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
                            <div className="absolute top-6 right-6 flex gap-3">
                            {(() => {
@@ -275,7 +284,7 @@ const MenuCategories = () => {
                            })()}
                            </div>
                            <div className="absolute bottom-6 left-6 flex items-center gap-2 text-[10px] font-black text-white/90 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full uppercase tracking-widest border border-white/10">
-                              <Clock size={12} className="text-primary" /> {item.time}
+                              <Clock size={12} className="text-primary" /> {item.time || `${item.prep_time} min`}
                            </div>
                         </div>
                         <div className="p-8">
