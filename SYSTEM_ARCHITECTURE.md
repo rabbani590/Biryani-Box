@@ -126,7 +126,6 @@ Socket.IO 4.5+
 
 **Database:**
 
-```
 PostgreSQL 14+
 ├─ Relational data
 ├─ ACID compliance
@@ -139,27 +138,24 @@ MongoDB (Optional)
 ├─ Document storage
 ├─ Horizontal scaling
 └─ Real-time analytics
-```
 
 **Caching:**
 
-```
 Redis 7+
 ├─ Session storage
 ├─ Real-time data cache
 ├─ Rate limiting
 └─ Message queue
-```
 
 **Job Queue:**
 
-```
 Bull/RabbitMQ
 ├─ Background jobs
 ├─ Email sending
 ├─ Report generation
 ├─ Scheduled tasks
 └─ Analytics processing
+
 ```
 
 ### Machine Learning (NEW)
@@ -167,6 +163,7 @@ Bull/RabbitMQ
 **Python ML Stack:**
 
 ```
+
 Python 3.9+
 ├─ FastAPI (ML API server)
 ├─ Pandas (Data analysis)
@@ -182,18 +179,20 @@ JS ML Stack (Alternative):
 ├─ Brain.js
 ├─ ML.js
 └─ Simple-Statistics
+
 ```
 
 ### Monitoring & Analytics (NEW)
 
 ```
+
 Metrics & Logs:
 ├─ Prometheus (Metrics)
 ├─ Grafana (Dashboards)
 ├─ ELK Stack (Logs)
-│  ├─ Elasticsearch
-│  ├─ Logstash
-│  └─ Kibana
+│ ├─ Elasticsearch
+│ ├─ Logstash
+│ └─ Kibana
 └─ Sentry (Error tracking)
 
 Analytics:
@@ -201,7 +200,8 @@ Analytics:
 ├─ Amplitude
 ├─ Mixpanel
 └─ Custom dashboards
-```
+
+````
 
 ---
 
@@ -227,7 +227,7 @@ CREATE TABLE users (
   INDEX idx_email (email),
   INDEX idx_role (role)
 );
-```
+````
 
 ### Orders Table
 

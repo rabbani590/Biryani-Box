@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useOrders } from '../context/OrderContext';
+
+const MotionDiv = motion.div;
+import { useOrders } from '../context/useContextHooks';
 import { ShoppingCart, Plus, Minus, Trash2, CheckCircle, Table, ChevronRight } from 'lucide-react';
 
 // Images
@@ -108,7 +110,7 @@ const POS = ({ user }) => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           <AnimatePresence mode="wait">
             {filteredMenu.map((item) => (
-              <motion.div
+              <MotionDiv
                 key={item.id}
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -143,7 +145,7 @@ const POS = ({ user }) => {
                 <button className="w-full py-3 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all text-xs font-bold uppercase tracking-widest">
                   <Plus size={16} /> Add to Box
                 </button>
-              </motion.div>
+              </MotionDiv>
             ))}
           </AnimatePresence>
         </div>
@@ -173,7 +175,7 @@ const POS = ({ user }) => {
             </div>
           ) : (
             cart.map((item) => (
-              <motion.div
+              <MotionDiv
                 key={item.id}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -211,7 +213,7 @@ const POS = ({ user }) => {
                     <Plus size={12} />
                   </button>
                 </div>
-              </motion.div>
+              </MotionDiv>
             ))
           )}
         </div>
@@ -239,7 +241,7 @@ const POS = ({ user }) => {
 
         <AnimatePresence>
           {showSuccess && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0, y: 50, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
@@ -255,7 +257,7 @@ const POS = ({ user }) => {
                   Sent to Command Center
                 </p>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </div>

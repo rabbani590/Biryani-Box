@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionDiv = motion.div;
 import {
   ShoppingBag,
   X,
@@ -15,8 +17,7 @@ import {
   User,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
+import { useCart, useAuth } from '../context/useContextHooks';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -128,7 +129,7 @@ const Navbar = () => {
                 </button>
                 <AnimatePresence>
                   {isProfileOpen && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
@@ -171,7 +172,7 @@ const Navbar = () => {
                       >
                         <LogOut size={16} /> Logout Hub
                       </button>
-                    </motion.div>
+                    </MotionDiv>
                   )}
                 </AnimatePresence>
               </div>
@@ -203,7 +204,7 @@ const Navbar = () => {
 
       <AnimatePresence>
         {isMobileMenuOpen && (
-          <motion.div
+          <MotionDiv
             initial={{ opacity: 0, x: '100%' }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }}
@@ -242,7 +243,7 @@ const Navbar = () => {
                 </button>
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
     </nav>

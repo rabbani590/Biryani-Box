@@ -1,12 +1,9 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { MOCK_CART_ITEMS } from './menuData';
+import { CartContext } from './contexts';
 
-const CartContext = createContext();
+// export const useCart = () => useContext(CartContext);
 
-// Mock cart items for demo
-const MOCK_CART_ITEMS = [
-  { id: 1, name: 'Chicken Dum Biryani', price: 18.99, quantity: 1, category: 'Biryani' },
-  { id: 6, name: 'Chicken Tikka', price: 14.99, quantity: 1, category: 'Appetizers' },
-];
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(() => {
@@ -48,4 +45,3 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => useContext(CartContext);

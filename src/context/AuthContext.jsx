@@ -1,8 +1,7 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { AuthContext } from './contexts';
 
-const AuthContext = createContext();
-
-export const useAuth = () => useContext(AuthContext);
+// export const useAuth = () => useContext(AuthContext);
 
 // Mock user profiles for demo
 const MOCK_USERS = {

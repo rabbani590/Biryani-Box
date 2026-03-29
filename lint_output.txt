@@ -1,0 +1,88 @@
+
+> biryani-box@0.0.0 lint
+> eslint .
+
+
+C:\Users\DV.PRASAD\Biryani-Box\src\components\Navbar.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\components\POS.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\context\AuthContext.jsx
+  1:54  error  'useEffect' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                no-unused-vars
+  5:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\DV.PRASAD\Biryani-Box\src\context\CartContext.jsx
+  51:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\DV.PRASAD\Biryani-Box\src\context\DemoDataContext.jsx
+    5:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+    8:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+   51:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  106:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  158:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+  210:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\DV.PRASAD\Biryani-Box\src\context\OrderContext.jsx
+  5:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components  react-refresh/only-export-components
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\Cart.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\Catering.jsx
+   5:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                     no-unused-vars
+  21:10  error  'formSubmitted' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  21:25  error  'setFormSubmitted' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  23:9   error  'navigate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u          no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\Checkout.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           no-unused-vars
+  23:55  error  Error: Cannot call impure function during render
+
+`Math.random` is an impure function. Calling an impure function can produce unstable results that update unpredictably when the component happens to re-render. (https://react.dev/reference/rules/components-and-hooks-must-be-pure#components-and-hooks-must-be-idempotent).
+
+  21 |   const [paymentMethod, setPaymentMethod] = useState('upi');
+  22 |
+> 23 |   const orderNumber = useMemo(() => `BOX-${Math.floor(Math.random() * 90000 + 10000)}`, []);
+     |                                                       ^^^^^^^^^^^^^ Cannot call impure function
+  24 |
+  25 |   const handleCheckout = (e) => {
+  26 |     e.preventDefault();  react-hooks/purity
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\CustomerAuth.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\Dashboard.jsx
+    2:10  error    'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                   no-unused-vars
+  689:5   warning  React Hook React.useMemo has unnecessary dependencies: 'ingredients', 'menu', and 'orders'. Either exclude them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\DeliveryDashboard.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  15:9   error  'navigate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\GiftCards.jsx
+  2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\Home.jsx
+    2:10   error    'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                     no-unused-vars
+   29:10   error    'useAuth' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                    no-unused-vars
+   71:6    warning  React Hook useEffect has a missing dependency: 'slides.length'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  237:7    error    'filterVeg' is not defined                                                                                        no-undef
+  238:8    error    'filterVeg' is not defined                                                                                        no-undef
+  239:8    error    'filterVeg' is not defined                                                                                        no-undef
+  285:36   error    'setFilterVeg' is not defined                                                                                     no-undef
+  286:122  error    'filterVeg' is not defined                                                                                        no-undef
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\Login.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                no-unused-vars
+  15:10  error  'formData' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u     no-unused-vars
+  15:20  error  'setFormData' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  23:9   error  'roles' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u        no-unused-vars
+
+C:\Users\DV.PRASAD\Biryani-Box\src\pages\OrderHistory.jsx
+   2:10  error  'motion' is defined but never used. Allowed unused vars must match /^[A-Z_]/u             no-unused-vars
+  17:9   error  'navigate' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+Γ£û 39 problems (37 errors, 2 warnings)
+

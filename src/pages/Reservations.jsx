@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+
 import {
   Calendar,
   User,
@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useDemoData } from '../context/DemoDataContext';
+import { useDemoData } from '../context/useContextHooks';
 
 const Reservations = () => {
   const { reservations } = useDemoData();

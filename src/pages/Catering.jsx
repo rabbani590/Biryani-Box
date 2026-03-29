@@ -1,8 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useState } from 'react';
 import { motion } from 'framer-motion';
+
+const MotionDiv = motion.div;
 import {
   Users,
   Truck,
@@ -15,12 +15,12 @@ import {
   DollarSign,
   ChefHat,
 } from 'lucide-react';
-import { useDemoData } from '../context/DemoDataContext';
+import { useDemoData } from '../context/useContextHooks';
 
 const Catering = () => {
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  // const [formSubmitted, setFormSubmitted] = useState(false);
   const { cateringOrders } = useDemoData();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-bg-main text-white pt-24 pb-20 relative overflow-hidden">
@@ -50,7 +50,7 @@ const Catering = () => {
           </h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cateringOrders.map((order, idx) => (
-              <motion.div
+              <MotionDiv
                 key={order.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -89,12 +89,12 @@ const Catering = () => {
                 <button className="w-full py-2 bg-primary/20 text-primary font-bold rounded-lg hover:bg-primary/30 transition-all text-sm">
                   View Details
                 </button>
-              </motion.div>
+              </MotionDiv>
             ))}
           </div>
         </div>
         {/* Request Form */}
-        <motion.div
+        <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -149,7 +149,7 @@ const Catering = () => {
               Get Quote
             </button>
           </form>
-        </motion.div>
+        </MotionDiv>
 
         {/* Features */}
         <div className="mt-20 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -159,7 +159,7 @@ const Catering = () => {
             { icon: Utensils, title: 'Live Cooking', desc: 'Tandoor on-site available' },
             { icon: Star, title: 'Expert Team', desc: '50-500+ guests capacity' },
           ].map((item, i) => (
-            <motion.div
+            <MotionDiv
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -169,7 +169,7 @@ const Catering = () => {
               <item.icon size={32} className="text-primary mx-auto mb-3" />
               <h4 className="font-bold mb-2">{item.title}</h4>
               <p className="text-sm text-text-muted">{item.desc}</p>
-            </motion.div>
+            </MotionDiv>
           ))}
         </div>
       </div>

@@ -1,6 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCart } from '../context/CartContext';
+
+const MotionDiv = motion.div;
+const MotionButton = motion.button;
+import { useCart } from '../context/useContextHooks';
 import { useNavigate } from 'react-router-dom';
 import {
   CreditCard,
@@ -20,7 +23,7 @@ const Checkout = () => {
   const [step, setStep] = useState(1);
   const [paymentMethod, setPaymentMethod] = useState('upi');
 
-  const orderNumber = useMemo(() => `BOX-${Math.floor(Math.random() * 90000 + 10000)}`, []);
+  const [orderNumber] = useState(() => `BOX-${Math.floor(Math.random() * 90000 + 10000)}`);
 
   const handleCheckout = (e) => {
     e.preventDefault();
@@ -52,7 +55,7 @@ const Checkout = () => {
 
         <AnimatePresence mode="wait">
           {step === 1 ? (
-            <motion.div
+            <MotionDiv
               key="details"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -150,9 +153,9 @@ const Checkout = () => {
                   </button>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           ) : (
-            <motion.div
+            <MotionDiv
               key="success"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -194,7 +197,7 @@ const Checkout = () => {
                   Returning you to the home hub in seconds...
                 </p>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </div>

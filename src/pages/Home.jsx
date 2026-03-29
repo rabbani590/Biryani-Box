@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionDiv = motion.div;
+const MotionButton = motion.button;
 import {
   ShoppingBag,
   User,
@@ -24,9 +27,8 @@ import {
   Download,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useOrders } from '../context/OrderContext';
-import { useCart } from '../context/CartContext';
-import { useAuth } from '../context/AuthContext';
+import { useOrders } from '../context/useContextHooks';
+import { useCart } from '../context/useContextHooks';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -73,7 +75,7 @@ const Hero = () => {
   return (
     <section id="home" className="relative h-screen flex items-center overflow-hidden pt-20">
       <AnimatePresence mode="wait">
-        <motion.div
+        <MotionDiv
           key={currentSlide}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -87,11 +89,11 @@ const Hero = () => {
             className="w-full h-full object-cover opacity-30 scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-main via-bg-main/60 to-transparent" />
-        </motion.div>
+        </MotionDiv>
       </AnimatePresence>
 
       <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center">
-        <motion.div
+        <MotionDiv
           key={`text-${currentSlide}`}
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
@@ -121,9 +123,9 @@ const Hero = () => {
               View Rewards
             </button>
           </div>
-        </motion.div>
+        </MotionDiv>
 
-        <motion.div
+        <MotionDiv
           key={`img-${currentSlide}`}
           initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -136,7 +138,7 @@ const Hero = () => {
             alt="Dish"
             className="w-[85%] mx-auto relative z-10 filter drop-shadow-[0_45px_45px_rgba(229,138,48,0.4)]"
           />
-        </motion.div>
+        </MotionDiv>
       </div>
 
       <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-4 z-20">
@@ -156,7 +158,7 @@ const WelcomeBlurb = () => (
   <section className="section-padding bg-bg-main relative overflow-hidden">
     <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-primary/5 blur-[150px] rounded-full -translate-x-1/2 -translate-y-1/2" />
     <div className="container grid lg:grid-cols-2 gap-20 items-center">
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, x: -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -191,8 +193,8 @@ const WelcomeBlurb = () => (
             </p>
           </div>
         </div>
-      </motion.div>
-      <motion.div
+      </MotionDiv>
+      <MotionDiv
         initial={{ opacity: 0, scale: 0.9 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
@@ -213,7 +215,7 @@ const WelcomeBlurb = () => (
             — Rabbani Basha
           </p>
         </div>
-      </motion.div>
+      </MotionDiv>
     </div>
   </section>
 );
@@ -222,6 +224,8 @@ const MenuCategories = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [filterVeg, setFilterVeg] = useState('all');
+  const [filterSpice, setFilterSpice] = useState('all');
+  const [filterHalal, setFilterHalal] = useState(false);
   const { addToCart } = useCart();
   const { menu } = useOrders();
 
@@ -232,11 +236,13 @@ const MenuCategories = () => {
 
   const filteredItems = currentItems.filter((item) => {
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesFilter =
+    const matchesType =
       filterVeg === 'all' ||
-      (filterVeg === 'veg' && item.category !== 'Non-Veg') ||
-      (filterVeg === 'non-veg' && item.category === 'Non-Veg');
-    return matchesSearch && matchesFilter;
+      (filterVeg === 'veg' && item.isVeg) ||
+      (filterVeg === 'non-veg' && !item.isVeg);
+    const matchesSpice = filterSpice === 'all' || item.spiceLevel === Number(filterSpice);
+    const matchesHalal = !filterHalal || item.isHalal;
+    return matchesSearch && matchesType && matchesSpice && matchesHalal;
   });
 
   const getMenuItemImage = (item) => {
@@ -260,30 +266,53 @@ const MenuCategories = () => {
               Explore Our <span className="text-primary">Flavors.</span>
             </h2>
           </div>
-          <div className="flex-1 max-w-xl flex flex-col sm:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search
-                className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30"
-                size={20}
-              />
-              <input
-                type="text"
-                placeholder="Finding your flavor identifier..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 p-5 pl-16 rounded-full text-sm font-bold focus:border-primary outline-none transition-all text-white placeholder:text-white/20"
-              />
+          <div className="flex-1 max-w-2xl flex flex-col gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1 relative">
+                <Search
+                  className="absolute left-6 top-1/2 -translate-y-1/2 text-white/30"
+                  size={20}
+                />
+                <input
+                  type="text"
+                  placeholder="Finding your flavor identifier..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-white/5 border border-white/10 p-5 pl-16 rounded-full text-sm font-bold focus:border-primary outline-none transition-all text-white placeholder:text-white/20"
+                />
+              </div>
+              <div className="flex bg-white/5 p-1 rounded-full border border-white/10 shrink-0">
+                {['all', 'veg', 'non-veg'].map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setFilterVeg(type)}
+                    className={`px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${filterVeg === type ? 'bg-white text-black' : 'text-white/20 hover:text-white'}`}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
             </div>
-            <div className="flex bg-white/5 p-1 rounded-full border border-white/10 shrink-0">
-              {['all', 'veg', 'non-veg'].map((type) => (
-                <button
-                  key={type}
-                  onClick={() => setFilterVeg(type)}
-                  className={`px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all ${filterVeg === type ? 'bg-white text-black' : 'text-white/20 hover:text-white'}`}
-                >
-                  {type}
-                </button>
-              ))}
+            
+            <div className="flex flex-wrap items-center gap-4">
+              <div className="flex bg-white/5 p-1 rounded-full border border-white/10 shrink-0">
+                <span className="px-4 py-2 text-[10px] font-black uppercase tracking-widest text-white/30 self-center">Spice:</span>
+                {['all', '1', '2', '3'].map((spice) => (
+                  <button
+                    key={spice}
+                    onClick={() => setFilterSpice(spice)}
+                    className={`px-4 py-2 rounded-full text-[10px] font-black transition-all ${filterSpice === spice ? 'bg-primary text-white' : 'text-white/20 hover:text-white'}`}
+                  >
+                    {spice === 'all' ? 'Any' : Array(Number(spice)).fill('🌶️').join('')}
+                  </button>
+                ))}
+              </div>
+              <button
+                onClick={() => setFilterHalal(!filterHalal)}
+                className={`px-6 py-3 rounded-full border text-[10px] font-black uppercase tracking-widest transition-all ${filterHalal ? 'bg-green-500/20 border-green-500 text-green-500' : 'bg-white/5 border-white/10 text-white/30'}`}
+              >
+                Halal Only
+              </button>
             </div>
           </div>
         </div>
@@ -307,7 +336,7 @@ const MenuCategories = () => {
           <AnimatePresence mode="popLayout">
             {filteredItems.length > 0 ? (
               filteredItems.map((item) => (
-                <motion.div
+                <MotionDiv
                   key={item.name}
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -321,26 +350,37 @@ const MenuCategories = () => {
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                    <div className="absolute top-6 right-6 flex gap-3">
-                      {(() => {
-                        const isVeg =
-                          item.isVeg ||
-                          item.category?.toLowerCase().includes('veg') ||
-                          /paneer|vegetable|dal|samosa|kheer|rasmalai|kulfi/i.test(item.name);
-                        return (
-                          <div
-                            className={`w-6 h-6 border-2 rounded-sm flex items-center justify-center p-0.5 ${isVeg ? 'border-green-500' : 'border-red-500'}`}
-                          >
-                            <div
-                              className={`w-full h-full rounded-full ${isVeg ? 'bg-green-500' : 'bg-red-500'}`}
-                            />
-                          </div>
-                        );
-                      })()}
+                    <div className="absolute top-6 left-6 flex flex-col gap-2">
+                      {item.isVeg && (
+                        <div className="px-3 py-1 bg-green-500 text-white text-[8px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                          Vegetarian
+                        </div>
+                      )}
+                      {item.isHalal && (
+                        <div className="px-3 py-1 bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest rounded-full shadow-lg">
+                          Halal Certified
+                        </div>
+                      )}
+                    </div>
+                    <div className="absolute top-6 right-6 flex flex-col items-end gap-3">
+                      <div
+                        className={`w-6 h-6 border-2 rounded-sm flex items-center justify-center p-0.5 ${item.isVeg ? 'border-green-500' : 'border-red-500'}`}
+                      >
+                        <div
+                          className={`w-full h-full rounded-full ${item.isVeg ? 'bg-green-500' : 'bg-red-500'}`}
+                        />
+                      </div>
+                      {item.spiceLevel > 0 && (
+                        <div className="flex gap-0.5 bg-black/40 backdrop-blur-md p-1.5 rounded-lg border border-white/10">
+                          {Array(item.spiceLevel).fill(0).map((_, i) => (
+                            <span key={i} className="text-[10px]">🌶️</span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                     <div className="absolute bottom-6 left-6 flex items-center gap-2 text-[10px] font-black text-white/90 bg-black/40 backdrop-blur-md px-4 py-2 rounded-full uppercase tracking-widest border border-white/10">
                       <Clock size={12} className="text-primary" />{' '}
-                      {item.time || `${item.prep_time} min`}
+                      {item.prep_time} min
                     </div>
                   </div>
                   <div className="p-8">
@@ -377,7 +417,7 @@ const MenuCategories = () => {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </MotionDiv>
               ))
             ) : (
               <div className="col-span-full py-32 text-center text-white/20 font-black uppercase tracking-[0.5em]">
@@ -394,7 +434,7 @@ const MenuCategories = () => {
 const PromoGrid = () => (
   <section className="py-32 bg-bg-offset">
     <div className="container grid md:grid-cols-2 gap-10">
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, x: -30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -414,9 +454,9 @@ const PromoGrid = () => (
         <button className="px-10 py-5 bg-white text-primary rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:scale-105 transition-all shadow-2xl">
           Initialize Membership
         </button>
-      </motion.div>
+      </MotionDiv>
 
-      <motion.div
+      <MotionDiv
         initial={{ opacity: 0, x: 30 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
@@ -436,7 +476,7 @@ const PromoGrid = () => (
         <button className="px-10 py-5 bg-white/5 border border-white/10 text-white rounded-full text-[10px] font-black uppercase tracking-[0.3em] hover:bg-white/10 transition-all">
           Request Deployment
         </button>
-      </motion.div>
+      </MotionDiv>
     </div>
   </section>
 );
@@ -696,7 +736,7 @@ const Home = () => {
       {/* Cart Float Badge */}
       <AnimatePresence>
         {cart.length > 0 && (
-          <motion.button
+          <MotionButton
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
@@ -707,7 +747,7 @@ const Home = () => {
             <span className="absolute -top-3 -right-3 w-10 h-10 bg-white text-primary rounded-2xl flex items-center justify-center text-[14px] font-black shadow-2xl border-2 border-primary">
               {cart.length}
             </span>
-          </motion.button>
+          </MotionButton>
         )}
       </AnimatePresence>
     </div>

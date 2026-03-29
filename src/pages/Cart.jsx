@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useCart } from '../context/CartContext';
+import { useCart } from '../context/useContextHooks';
 import { useNavigate } from 'react-router-dom';
 import { Trash2, ShoppingBag, Plus, Minus, ArrowRight, ChevronLeft } from 'lucide-react';
 

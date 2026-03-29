@@ -1,5 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionDiv = motion.div;
 import {
   LayoutDashboard,
   ShoppingCart,
@@ -32,8 +34,7 @@ import {
   Flame,
   Eye,
 } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
-import { useOrders } from '../context/OrderContext';
+import { useAuth, useOrders } from '../context/useContextHooks';
 import { useNavigate } from 'react-router-dom';
 import POS from '../components/POS';
 
@@ -739,7 +740,7 @@ const Dashboard = () => {
         <main className="px-10 py-10">
           <AnimatePresence mode="wait">
             {activeTab === 'overview' && (
-              <motion.div
+              <MotionDiv
                 key="overview"
                 initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -831,7 +832,7 @@ const Dashboard = () => {
                       secondary: 'Item level supply risk',
                     },
                   ].map((stat, idx) => (
-                    <motion.div
+                    <MotionDiv
                       key={idx}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -860,14 +861,14 @@ const Dashboard = () => {
                         <h3 className="text-4xl font-black mb-4">{stat.value}</h3>
                         <p className="text-xs text-text-muted font-medium">{stat.secondary}</p>
                       </div>
-                    </motion.div>
+                    </MotionDiv>
                   ))}
                 </div>
 
                 {/* Secondary Metrics Row */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   {/* Status Breakdown */}
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.32 }}
@@ -913,7 +914,7 @@ const Dashboard = () => {
                             <span className="text-lg font-black text-white">{status.value}</span>
                           </div>
                           <div className="h-2 bg-white/5 rounded-full overflow-hidden">
-                            <motion.div
+                            <MotionDiv
                               initial={{ width: 0 }}
                               animate={{
                                 width: `${(status.value / Math.max(analytics.totalOrders, 1)) * 100}%`,
@@ -925,10 +926,10 @@ const Dashboard = () => {
                         </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
 
                   {/* Top Performing Items */}
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4 }}
@@ -957,10 +958,10 @@ const Dashboard = () => {
                         <p className="text-text-muted text-sm text-center py-8">No orders yet</p>
                       )}
                     </div>
-                  </motion.div>
+                  </MotionDiv>
 
                   {/* Quick Stats */}
-                  <motion.div
+                  <MotionDiv
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.48 }}
@@ -995,7 +996,7 @@ const Dashboard = () => {
                         </p>
                       </div>
                     </div>
-                  </motion.div>
+                  </MotionDiv>
                 </div>
 
                 <div className="grid lg:grid-cols-3 gap-6">
@@ -1022,7 +1023,7 @@ const Dashboard = () => {
                     </h4>
                     <div className="h-64 flex items-end justify-around gap-2 bg-white/5 p-6 rounded-2xl border border-white/5">
                       {[45, 52, 38, 71, 55, 89, 64].map((height, i) => (
-                        <motion.div
+                        <MotionDiv
                           key={i}
                           initial={{ height: 0 }}
                           animate={{ height: `${height}%` }}
@@ -1035,7 +1036,7 @@ const Dashboard = () => {
                               ${height * 100}
                             </span>
                           </div>
-                        </motion.div>
+                        </MotionDiv>
                       ))}
                     </div>
                     <p className="text-[10px] text-text-muted font-medium mt-4 text-center">
@@ -1066,22 +1067,22 @@ const Dashboard = () => {
                     statusColors={statusColors}
                   />
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'pos' && (
-              <motion.div
+              <MotionDiv
                 key="pos"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
               >
                 <POS user={user} />
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'orders' && (
-              <motion.div
+              <MotionDiv
                 key="orders"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -1149,22 +1150,22 @@ const Dashboard = () => {
                     </div>
                   )}
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'users' && (
-              <motion.div
+              <MotionDiv
                 key="users"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
               >
                 <UserManagement />
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'menu' && (
-              <motion.div
+              <MotionDiv
                 key="menu"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -1183,11 +1184,11 @@ const Dashboard = () => {
                   exportIngredientsCSV={exportIngredientsCSV}
                   reorderForecast={reorderForecast}
                 />
-              </motion.div>
+              </MotionDiv>
             )}
 
             {activeTab === 'staff' && (
-              <motion.div
+              <MotionDiv
                 key="staff"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -1226,7 +1227,7 @@ const Dashboard = () => {
                     Update Security Token
                   </button>
                 </div>
-              </motion.div>
+              </MotionDiv>
             )}
           </AnimatePresence>
         </main>

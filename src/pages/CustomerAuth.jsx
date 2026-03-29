@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../context/useContextHooks';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Phone, Lock, ChevronRight, UserPlus, LogIn, ShieldCheck } from 'lucide-react';
 

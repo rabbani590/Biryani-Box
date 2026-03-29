@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+
+const MotionDiv = motion.div;
 import {
   Truck,
   MapPin,
@@ -11,10 +13,9 @@ import {
   Building,
   Plus,
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 const OrderHistory = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('active'); // active, history, addresses
 
   const mockActiveOrders = [
@@ -67,80 +68,160 @@ const OrderHistory = () => {
 
         <AnimatePresence mode="wait">
           {activeTab === 'active' && (
-            <motion.div
+            <MotionDiv
               key="active"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="space-y-6"
+              className="space-y-8"
             >
               {mockActiveOrders.map((order) => (
                 <div
                   key={order.id}
-                  className="bg-secondary/40 p-10 rounded-3xl border border-white/5 shadow-2xl overflow-hidden relative"
+                  className="bg-secondary/40 rounded-[40px] border border-white/5 shadow-3xl overflow-hidden relative"
                 >
-                  <div className="absolute top-0 right-0 py-2 px-8 bg-primary text-black font-bold uppercase tracking-widest text-[10px] rounded-bl-2xl">
-                    Live Tracking
-                  </div>
-                  <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 items-center">
-                    <div className="space-y-6">
-                      <div className="flex items-center gap-4">
-                        <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center text-primary border border-primary/20">
-                          <Truck size={32} />
-                        </div>
-                        <div>
-                          <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest leading-none mb-1">
-                            Order Identifier
-                          </p>
-                          <p className="text-xl font-bold font-heading">{order.id}</p>
-                        </div>
+                  {/* Top Header */}
+                  <div className="bg-primary/10 border-b border-white/5 p-8 flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="flex items-center gap-6">
+                      <div className="w-16 h-16 rounded-2xl bg-primary flex items-center justify-center text-white shadow-2xl shadow-primary/30">
+                        <Truck size={32} />
                       </div>
                       <div>
-                        <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest leading-none mb-2">
-                          Artisan Status
+                        <p className="text-[10px] font-black text-primary uppercase tracking-[0.4em] mb-1">
+                          Movement Protocol
                         </p>
-                        <div className="flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                          <span className="text-sm font-bold text-primary uppercase">
-                            {order.status}
-                          </span>
-                        </div>
+                        <h2 className="text-2xl font-black font-heading">{order.id}</h2>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-8">
+                      <div className="text-right">
+                        <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-1">
+                          Est. Injection
+                        </p>
+                        <p className="text-xl font-bold text-white">{order.eta}</p>
+                      </div>
+                      <div className="h-10 w-px bg-white/10" />
+                      <div className="text-right">
+                        <p className="text-[10px] font-black text-white/40 uppercase tracking-widest mb-1">
+                          Total Value
+                        </p>
+                        <p className="text-xl font-black text-primary font-heading">
+                          {order.total}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Tracking Progress */}
+                  <div className="p-10 md:p-16">
+                    <div className="relative mb-16">
+                      <div className="absolute top-1/2 left-0 w-full h-1 bg-white/5 -translate-y-1/2 rounded-full" />
+                      <MotionDiv
+                        initial={{ width: '40%' }}
+                        animate={{ width: '45%' }}
+                        transition={{ duration: 2, repeat: Infinity, repeatType: 'reverse' }}
+                        className="absolute top-1/2 left-0 h-1 bg-primary -translate-y-1/2 rounded-full shadow-[0_0_20px_rgba(229,138,48,0.5)]"
+                      />
+                      <div className="relative flex justify-between">
+                        {[
+                          { label: 'Received', status: 'completed' },
+                          { label: 'Preparing', status: 'active' },
+                          { label: 'Dispatch', status: 'pending' },
+                          { label: 'Delivered', status: 'pending' },
+                        ].map((step, i) => (
+                          <div key={i} className="flex flex-col items-center gap-4">
+                            <div
+                              className={`w-10 h-10 rounded-full border-4 flex items-center justify-center transition-all duration-500 z-10 ${
+                                step.status === 'completed'
+                                  ? 'bg-primary border-primary shadow-xl shadow-primary/20'
+                                  : step.status === 'active'
+                                    ? 'bg-bg-main border-primary animate-pulse'
+                                    : 'bg-bg-main border-white/10'
+                              }`}
+                            >
+                              {step.status === 'completed' && (
+                                <CheckCircle size={16} className="text-white" />
+                              )}
+                              {step.status === 'active' && (
+                                <div className="w-2 h-2 rounded-full bg-primary" />
+                              )}
+                            </div>
+                            <span
+                              className={`text-[10px] font-black uppercase tracking-widest ${
+                                step.status !== 'pending' ? 'text-white' : 'text-white/20'
+                              }`}
+                            >
+                              {step.label}
+                            </span>
+                          </div>
+                        ))}
                       </div>
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4 text-sm font-medium">
-                        <Package size={18} className="text-primary" />
-                        <span>{order.items}</span>
-                      </div>
-                      <div className="flex items-center gap-4 text-sm font-medium">
-                        <Clock size={18} className="text-primary" />
-                        <span>
-                          Arrival in approx <span className="text-primary">{order.eta}</span>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-center gap-6">
-                      <div className="w-40 h-40 rounded-full border-4 border-white/5 flex items-center justify-center shrink-0 p-4">
-                        <div className="w-full h-full rounded-full border-4 border-primary border-t-white/10 animate-spin flex items-center justify-center">
-                          <span className="text-xs font-black uppercase tracking-widest -rotate-90">
-                            Hot
-                          </span>
+                    <div className="grid lg:grid-cols-2 gap-12">
+                      {/* Items */}
+                      <div className="p-8 bg-white/5 rounded-3xl border border-white/5 space-y-6">
+                        <h4 className="text-xs font-black uppercase tracking-[0.3em] text-white/40 mb-4 flex items-center gap-2">
+                          <Package size={14} className="text-primary" /> Payload Data
+                        </h4>
+                        <div className="flex items-center gap-4">
+                          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center font-black text-primary border border-white/10">
+                            2x
+                          </div>
+                          <div>
+                            <p className="font-bold text-white leading-tight">
+                              Special Chicken Dum Biryani
+                            </p>
+                            <p className="text-[10px] text-text-muted uppercase tracking-widest mt-1">
+                              Double Masala • Extra Raita
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <button className="btn-primary w-full py-4 text-xs font-black uppercase tracking-widest">
-                        Contact Driver Hub
-                      </button>
+
+                      {/* Curator Card */}
+                      <div className="p-8 bg-primary/5 rounded-3xl border border-primary/20 flex items-center gap-8">
+                        <div className="relative">
+                          <div className="w-20 h-20 rounded-2xl bg-secondary border border-white/10 flex items-center justify-center font-black text-primary text-2xl shadow-2xl overflow-hidden">
+                            <span className="relative z-10">RB</span>
+                            <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 to-transparent" />
+                          </div>
+                          <div className="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-green-500 border-4 border-bg-main flex items-center justify-center shadow-lg">
+                            <CheckCircle size={12} className="text-white" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em] mb-1">
+                            Assigned Curator
+                          </p>
+                          <h4 className="text-xl font-black font-heading mb-2">Rabbani B.</h4>
+                          <div className="flex gap-4">
+                            <button className="px-6 py-2 bg-white/5 border border-white/10 rounded-full text-[8px] font-black uppercase tracking-widest hover:bg-white/10 transition-all">
+                              Message Hub
+                            </button>
+                            <button className="px-6 py-2 bg-primary text-white rounded-full text-[8px] font-black uppercase tracking-widest shadow-lg shadow-primary/20 hover:scale-105 transition-all">
+                              Direct Sync
+                            </button>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                  </div>
+
+                  {/* Bottom Footer */}
+                  <div className="p-8 border-t border-white/5 flex justify-center">
+                    <button className="flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.4em] text-white/30 hover:text-primary transition-all group">
+                      <MapPin size={16} className="group-hover:animate-bounce" />
+                      View Full Logistic Grid
+                    </button>
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </MotionDiv>
           )}
 
           {activeTab === 'history' && (
-            <motion.div
+            <MotionDiv
               key="history"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -171,11 +252,11 @@ const OrderHistory = () => {
                   </div>
                 </div>
               ))}
-            </motion.div>
+            </MotionDiv>
           )}
 
           {activeTab === 'addresses' && (
-            <motion.div
+            <MotionDiv
               key="addresses"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -205,7 +286,7 @@ const OrderHistory = () => {
                   New Coordinate Hub
                 </span>
               </button>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </div>
