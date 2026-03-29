@@ -6,92 +6,474 @@ export const useOrders = () => useContext(OrderContext);
 
 // Core ingredient-level inventory (new feature)
 const MOCK_INGREDIENTS = [
-  { id: 1, name: 'Basmati Rice', unit: 'kg', stock: 100, minStock: 10, reorderLeadDays: 3, unitCost: 2.5 },
+  {
+    id: 1,
+    name: 'Basmati Rice',
+    unit: 'kg',
+    stock: 100,
+    minStock: 10,
+    reorderLeadDays: 3,
+    unitCost: 2.5,
+  },
   { id: 2, name: 'Chicken', unit: 'kg', stock: 60, minStock: 8, reorderLeadDays: 2, unitCost: 5.2 },
   { id: 3, name: 'Mutton', unit: 'kg', stock: 40, minStock: 6, reorderLeadDays: 3, unitCost: 8.5 },
   { id: 4, name: 'Shrimp', unit: 'kg', stock: 25, minStock: 5, reorderLeadDays: 4, unitCost: 9.0 },
   { id: 5, name: 'Paneer', unit: 'kg', stock: 30, minStock: 5, reorderLeadDays: 3, unitCost: 4.5 },
-  { id: 6, name: 'Vegetables', unit: 'kg', stock: 80, minStock: 12, reorderLeadDays: 2, unitCost: 3.2 },
-  { id: 7, name: 'Eggs', unit: 'units', stock: 120, minStock: 20, reorderLeadDays: 2, unitCost: 0.2 },
+  {
+    id: 6,
+    name: 'Vegetables',
+    unit: 'kg',
+    stock: 80,
+    minStock: 12,
+    reorderLeadDays: 2,
+    unitCost: 3.2,
+  },
+  {
+    id: 7,
+    name: 'Eggs',
+    unit: 'units',
+    stock: 120,
+    minStock: 20,
+    reorderLeadDays: 2,
+    unitCost: 0.2,
+  },
   { id: 8, name: 'Flour', unit: 'kg', stock: 60, minStock: 8, reorderLeadDays: 2, unitCost: 1.1 },
   { id: 9, name: 'Dairy', unit: 'kg', stock: 70, minStock: 10, reorderLeadDays: 2, unitCost: 3.8 },
-  { id: 10, name: 'Spices', unit: 'kg', stock: 40, minStock: 5, reorderLeadDays: 2, unitCost: 10.0 },
+  {
+    id: 10,
+    name: 'Spices',
+    unit: 'kg',
+    stock: 40,
+    minStock: 5,
+    reorderLeadDays: 2,
+    unitCost: 10.0,
+  },
 ];
 
 const MENU_RECIPES = {
-  1: [{ ingredientId: 1, qty: 0.45 }, { ingredientId: 2, qty: 0.22 }, { ingredientId: 9, qty: 0.08 }, { ingredientId: 10, qty: 0.02 }],
-  2: [{ ingredientId: 1, qty: 0.45 }, { ingredientId: 3, qty: 0.26 }, { ingredientId: 9, qty: 0.08 }, { ingredientId: 10, qty: 0.02 }],
-  3: [{ ingredientId: 1, qty: 0.42 }, { ingredientId: 4, qty: 0.30 }, { ingredientId: 9, qty: 0.06 }, { ingredientId: 10, qty: 0.02 }],
-  4: [{ ingredientId: 1, qty: 0.40 }, { ingredientId: 6, qty: 0.30 }, { ingredientId: 9, qty: 0.05 }, { ingredientId: 10, qty: 0.02 }],
-  5: [{ ingredientId: 1, qty: 0.40 }, { ingredientId: 7, qty: 2 }, { ingredientId: 9, qty: 0.05 }, { ingredientId: 10, qty: 0.02 }],
-  6: [{ ingredientId: 2, qty: 0.18 }, { ingredientId: 10, qty: 0.03 }, { ingredientId: 9, qty: 0.04 }],
-  7: [{ ingredientId: 5, qty: 0.20 }, { ingredientId: 10, qty: 0.03 }, { ingredientId: 9, qty: 0.04 }],
-  8: [{ ingredientId: 3, qty: 0.16 }, { ingredientId: 10, qty: 0.03 }, { ingredientId: 9, qty: 0.04 }],
-  9: [{ ingredientId: 2, qty: 0.14 }, { ingredientId: 10, qty: 0.03 }, { ingredientId: 9, qty: 0.04 }],
-  10: [{ ingredientId: 8, qty: 0.15 }, { ingredientId: 6, qty: 0.05 }, { ingredientId: 10, qty: 0.02 }],
-  11: [{ ingredientId: 8, qty: 0.12 }, { ingredientId: 6, qty: 0.02 }, { ingredientId: 9, qty: 0.02 }],
-  12: [{ ingredientId: 8, qty: 0.10 }, { ingredientId: 9, qty: 0.02 }],
-  13: [{ ingredientId: 8, qty: 0.08 }, { ingredientId: 6, qty: 0.02 }],
-  14: [{ ingredientId: 8, qty: 0.14 }, { ingredientId: 5, qty: 0.06 }, { ingredientId: 9, qty: 0.02 }],
-  15: [{ ingredientId: 2, qty: 0.20 }, { ingredientId: 9, qty: 0.06 }, { ingredientId: 10, qty: 0.03 }],
-  16: [{ ingredientId: 5, qty: 0.22 }, { ingredientId: 9, qty: 0.05 }, { ingredientId: 10, qty: 0.03 }],
-  17: [{ ingredientId: 3, qty: 0.20 }, { ingredientId: 9, qty: 0.06 }, { ingredientId: 10, qty: 0.03 }],
-  18: [{ ingredientId: 6, qty: 0.18 }, { ingredientId: 8, qty: 0.20 }, { ingredientId: 10, qty: 0.03 }],
-  19: [{ ingredientId: 9, qty: 0.10 }, { ingredientId: 2, qty: 0.02 }, { ingredientId: 10, qty: 0.01 }],
-  20: [{ ingredientId: 9, qty: 0.10 }, { ingredientId: 10, qty: 0.02 }],
-  21: [{ ingredientId: 9, qty: 0.12 }, { ingredientId: 10, qty: 0.02 }],
-  22: [{ ingredientId: 9, qty: 0.08 }, { ingredientId: 8, qty: 0.04 }, { ingredientId: 10, qty: 0.01 }],
-  23: [{ ingredientId: 1, qty: 1.40 }, { ingredientId: 2, qty: 0.55 }, { ingredientId: 8, qty: 0.45 }, { ingredientId: 10, qty: 0.08 }],
-  24: [{ ingredientId: 1, qty: 0.80 }, { ingredientId: 2, qty: 0.30 }, { ingredientId: 8, qty: 0.30 }, { ingredientId: 10, qty: 0.05 }],
-  25: [{ ingredientId: 1, qty: 2.5 }, { ingredientId: 3, qty: 0.8 }, { ingredientId: 8, qty: 0.75 }, { ingredientId: 10, qty: 0.10 }],
+  1: [
+    { ingredientId: 1, qty: 0.45 },
+    { ingredientId: 2, qty: 0.22 },
+    { ingredientId: 9, qty: 0.08 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  2: [
+    { ingredientId: 1, qty: 0.45 },
+    { ingredientId: 3, qty: 0.26 },
+    { ingredientId: 9, qty: 0.08 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  3: [
+    { ingredientId: 1, qty: 0.42 },
+    { ingredientId: 4, qty: 0.3 },
+    { ingredientId: 9, qty: 0.06 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  4: [
+    { ingredientId: 1, qty: 0.4 },
+    { ingredientId: 6, qty: 0.3 },
+    { ingredientId: 9, qty: 0.05 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  5: [
+    { ingredientId: 1, qty: 0.4 },
+    { ingredientId: 7, qty: 2 },
+    { ingredientId: 9, qty: 0.05 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  6: [
+    { ingredientId: 2, qty: 0.18 },
+    { ingredientId: 10, qty: 0.03 },
+    { ingredientId: 9, qty: 0.04 },
+  ],
+  7: [
+    { ingredientId: 5, qty: 0.2 },
+    { ingredientId: 10, qty: 0.03 },
+    { ingredientId: 9, qty: 0.04 },
+  ],
+  8: [
+    { ingredientId: 3, qty: 0.16 },
+    { ingredientId: 10, qty: 0.03 },
+    { ingredientId: 9, qty: 0.04 },
+  ],
+  9: [
+    { ingredientId: 2, qty: 0.14 },
+    { ingredientId: 10, qty: 0.03 },
+    { ingredientId: 9, qty: 0.04 },
+  ],
+  10: [
+    { ingredientId: 8, qty: 0.15 },
+    { ingredientId: 6, qty: 0.05 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  11: [
+    { ingredientId: 8, qty: 0.12 },
+    { ingredientId: 6, qty: 0.02 },
+    { ingredientId: 9, qty: 0.02 },
+  ],
+  12: [
+    { ingredientId: 8, qty: 0.1 },
+    { ingredientId: 9, qty: 0.02 },
+  ],
+  13: [
+    { ingredientId: 8, qty: 0.08 },
+    { ingredientId: 6, qty: 0.02 },
+  ],
+  14: [
+    { ingredientId: 8, qty: 0.14 },
+    { ingredientId: 5, qty: 0.06 },
+    { ingredientId: 9, qty: 0.02 },
+  ],
+  15: [
+    { ingredientId: 2, qty: 0.2 },
+    { ingredientId: 9, qty: 0.06 },
+    { ingredientId: 10, qty: 0.03 },
+  ],
+  16: [
+    { ingredientId: 5, qty: 0.22 },
+    { ingredientId: 9, qty: 0.05 },
+    { ingredientId: 10, qty: 0.03 },
+  ],
+  17: [
+    { ingredientId: 3, qty: 0.2 },
+    { ingredientId: 9, qty: 0.06 },
+    { ingredientId: 10, qty: 0.03 },
+  ],
+  18: [
+    { ingredientId: 6, qty: 0.18 },
+    { ingredientId: 8, qty: 0.2 },
+    { ingredientId: 10, qty: 0.03 },
+  ],
+  19: [
+    { ingredientId: 9, qty: 0.1 },
+    { ingredientId: 2, qty: 0.02 },
+    { ingredientId: 10, qty: 0.01 },
+  ],
+  20: [
+    { ingredientId: 9, qty: 0.1 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  21: [
+    { ingredientId: 9, qty: 0.12 },
+    { ingredientId: 10, qty: 0.02 },
+  ],
+  22: [
+    { ingredientId: 9, qty: 0.08 },
+    { ingredientId: 8, qty: 0.04 },
+    { ingredientId: 10, qty: 0.01 },
+  ],
+  23: [
+    { ingredientId: 1, qty: 1.4 },
+    { ingredientId: 2, qty: 0.55 },
+    { ingredientId: 8, qty: 0.45 },
+    { ingredientId: 10, qty: 0.08 },
+  ],
+  24: [
+    { ingredientId: 1, qty: 0.8 },
+    { ingredientId: 2, qty: 0.3 },
+    { ingredientId: 8, qty: 0.3 },
+    { ingredientId: 10, qty: 0.05 },
+  ],
+  25: [
+    { ingredientId: 1, qty: 2.5 },
+    { ingredientId: 3, qty: 0.8 },
+    { ingredientId: 8, qty: 0.75 },
+    { ingredientId: 10, qty: 0.1 },
+  ],
 };
 
 const MOCK_MENU = [
   // Biryani (5)
-  { id: 1, name: 'Chicken Dum Biryani', price: 18.99, category: 'Biryani', image: '🍚', prep_time: 25, rating: 4.8 },
-  { id: 2, name: 'Mutton Dum Biryani', price: 22.99, category: 'Biryani', image: '🍚', prep_time: 30, rating: 4.9 },
-  { id: 3, name: 'Shrimp Biryani', price: 24.99, category: 'Biryani', image: '🍚', prep_time: 20, rating: 4.7 },
-  { id: 4, name: 'Vegetable Dum Biryani', price: 16.99, category: 'Biryani', image: '🥘', prep_time: 22, rating: 4.6 },
-  { id: 5, name: 'Egg Biryani', price: 17.99, category: 'Biryani', image: '🍚', prep_time: 20, rating: 4.5 },
-  
+  {
+    id: 1,
+    name: 'Chicken Dum Biryani',
+    price: 18.99,
+    category: 'Biryani',
+    image: '🍚',
+    prep_time: 25,
+    rating: 4.8,
+  },
+  {
+    id: 2,
+    name: 'Mutton Dum Biryani',
+    price: 22.99,
+    category: 'Biryani',
+    image: '🍚',
+    prep_time: 30,
+    rating: 4.9,
+  },
+  {
+    id: 3,
+    name: 'Shrimp Biryani',
+    price: 24.99,
+    category: 'Biryani',
+    image: '🍚',
+    prep_time: 20,
+    rating: 4.7,
+  },
+  {
+    id: 4,
+    name: 'Vegetable Dum Biryani',
+    price: 16.99,
+    category: 'Biryani',
+    image: '🥘',
+    prep_time: 22,
+    rating: 4.6,
+  },
+  {
+    id: 5,
+    name: 'Egg Biryani',
+    price: 17.99,
+    category: 'Biryani',
+    image: '🍚',
+    prep_time: 20,
+    rating: 4.5,
+  },
+
   // Appetizers (5)
-  { id: 6, name: 'Chicken Tikka', price: 14.99, category: 'Appetizers', image: '🍗', prep_time: 15, rating: 4.7 },
-  { id: 7, name: 'Paneer 65', price: 12.99, category: 'Appetizers', image: '🥘', prep_time: 12, rating: 4.6 },
-  { id: 8, name: 'Lamb Seekh Kabab', price: 15.99, category: 'Appetizers', image: '🍗', prep_time: 15, rating: 4.8 },
-  { id: 9, name: 'Chicken Lollipop', price: 13.99, category: 'Appetizers', image: '🍗', prep_time: 12, rating: 4.5 },
-  { id: 10, name: 'Samosa (3pc)', price: 8.99, category: 'Appetizers', image: '🥟', prep_time: 8, rating: 4.4 },
-  
+  {
+    id: 6,
+    name: 'Chicken Tikka',
+    price: 14.99,
+    category: 'Appetizers',
+    image: '🍗',
+    prep_time: 15,
+    rating: 4.7,
+  },
+  {
+    id: 7,
+    name: 'Paneer 65',
+    price: 12.99,
+    category: 'Appetizers',
+    image: '🥘',
+    prep_time: 12,
+    rating: 4.6,
+  },
+  {
+    id: 8,
+    name: 'Lamb Seekh Kabab',
+    price: 15.99,
+    category: 'Appetizers',
+    image: '🍗',
+    prep_time: 15,
+    rating: 4.8,
+  },
+  {
+    id: 9,
+    name: 'Chicken Lollipop',
+    price: 13.99,
+    category: 'Appetizers',
+    image: '🍗',
+    prep_time: 12,
+    rating: 4.5,
+  },
+  {
+    id: 10,
+    name: 'Samosa (3pc)',
+    price: 8.99,
+    category: 'Appetizers',
+    image: '🥟',
+    prep_time: 8,
+    rating: 4.4,
+  },
+
   // Breads (4)
-  { id: 11, name: 'Garlic Naan', price: 4.99, category: 'Breads', image: '🍞', prep_time: 5, rating: 4.7 },
-  { id: 12, name: 'Butter Naan', price: 3.99, category: 'Breads', image: '🍞', prep_time: 5, rating: 4.6 },
+  {
+    id: 11,
+    name: 'Garlic Naan',
+    price: 4.99,
+    category: 'Breads',
+    image: '🍞',
+    prep_time: 5,
+    rating: 4.7,
+  },
+  {
+    id: 12,
+    name: 'Butter Naan',
+    price: 3.99,
+    category: 'Breads',
+    image: '🍞',
+    prep_time: 5,
+    rating: 4.6,
+  },
   { id: 13, name: 'Roti', price: 2.99, category: 'Breads', image: '🍞', prep_time: 3, rating: 4.5 },
-  { id: 14, name: 'Kulcha (Cheese)', price: 5.99, category: 'Breads', image: '🧀', prep_time: 8, rating: 4.8 },
-  
+  {
+    id: 14,
+    name: 'Kulcha (Cheese)',
+    price: 5.99,
+    category: 'Breads',
+    image: '🧀',
+    prep_time: 8,
+    rating: 4.8,
+  },
+
   // Curries (4)
-  { id: 15, name: 'Butter Chicken', price: 16.99, category: 'Curries', image: '🍛', prep_time: 20, rating: 4.9 },
-  { id: 16, name: 'Paneer Tikka Masala', price: 14.99, category: 'Curries', image: '🍛', prep_time: 18, rating: 4.8 },
-  { id: 17, name: 'Lamb Rogan Josh', price: 18.99, category: 'Curries', image: '🍛', prep_time: 25, rating: 4.7 },
-  { id: 18, name: 'Chole Bhature', price: 9.99, category: 'Curries', image: '🥘', prep_time: 15, rating: 4.6 },
-  
+  {
+    id: 15,
+    name: 'Butter Chicken',
+    price: 16.99,
+    category: 'Curries',
+    image: '🍛',
+    prep_time: 20,
+    rating: 4.9,
+  },
+  {
+    id: 16,
+    name: 'Paneer Tikka Masala',
+    price: 14.99,
+    category: 'Curries',
+    image: '🍛',
+    prep_time: 18,
+    rating: 4.8,
+  },
+  {
+    id: 17,
+    name: 'Lamb Rogan Josh',
+    price: 18.99,
+    category: 'Curries',
+    image: '🍛',
+    prep_time: 25,
+    rating: 4.7,
+  },
+  {
+    id: 18,
+    name: 'Chole Bhature',
+    price: 9.99,
+    category: 'Curries',
+    image: '🥘',
+    prep_time: 15,
+    rating: 4.6,
+  },
+
   // Desserts (4)
-  { id: 19, name: 'Rasmalai', price: 5.99, category: 'Dessert', image: '🍮', prep_time: 2, rating: 4.8 },
-  { id: 20, name: 'Gulab Jamun', price: 5.99, category: 'Dessert', image: '🍮', prep_time: 2, rating: 4.7 },
-  { id: 21, name: 'Kheer', price: 6.99, category: 'Dessert', image: '🍚', prep_time: 2, rating: 4.6 },
-  { id: 22, name: 'Ice Cream Kulfi', price: 4.99, category: 'Dessert', image: '🍦', prep_time: 1, rating: 4.9 },
-  
+  {
+    id: 19,
+    name: 'Rasmalai',
+    price: 5.99,
+    category: 'Dessert',
+    image: '🍮',
+    prep_time: 2,
+    rating: 4.8,
+  },
+  {
+    id: 20,
+    name: 'Gulab Jamun',
+    price: 5.99,
+    category: 'Dessert',
+    image: '🍮',
+    prep_time: 2,
+    rating: 4.7,
+  },
+  {
+    id: 21,
+    name: 'Kheer',
+    price: 6.99,
+    category: 'Dessert',
+    image: '🍚',
+    prep_time: 2,
+    rating: 4.6,
+  },
+  {
+    id: 22,
+    name: 'Ice Cream Kulfi',
+    price: 4.99,
+    category: 'Dessert',
+    image: '🍦',
+    prep_time: 1,
+    rating: 4.9,
+  },
+
   // Combos (3)
-  { id: 23, name: 'Family Combo (4)', price: 49.99, category: 'Combos', image: '🎁', prep_time: 30, rating: 4.9 },
-  { id: 24, name: 'Couple Combo (2)', price: 35.99, category: 'Combos', image: '🎁', prep_time: 25, rating: 4.8 },
-  { id: 25, name: 'Party Pack (6)', price: 79.99, category: 'Combos', image: '🎉', prep_time: 35, rating: 4.9 },
+  {
+    id: 23,
+    name: 'Family Combo (4)',
+    price: 49.99,
+    category: 'Combos',
+    image: '🎁',
+    prep_time: 30,
+    rating: 4.9,
+  },
+  {
+    id: 24,
+    name: 'Couple Combo (2)',
+    price: 35.99,
+    category: 'Combos',
+    image: '🎁',
+    prep_time: 25,
+    rating: 4.8,
+  },
+  {
+    id: 25,
+    name: 'Party Pack (6)',
+    price: 79.99,
+    category: 'Combos',
+    image: '🎉',
+    prep_time: 35,
+    rating: 4.9,
+  },
 ];
 
 // Mock orders for demo
 const MOCK_ORDERS = [
-  { id: 'ORD_001', items: [{id: 1, name: 'Chicken Dum Biryani', price: 18.99, quantity: 2}, {id: 6, name: 'Chicken Tikka', price: 14.99, quantity: 1}], total: 52.97, table: 'T1', captain: 'Arjun Singh', status: 'pending', timestamp: new Date(Date.now() - 5*60000).toISOString(), rating: 0 },
-  { id: 'ORD_002', items: [{id: 2, name: 'Mutton Dum Biryani', price: 22.99, quantity: 1}], total: 22.99, table: 'T2', captain: 'Arjun Singh', status: 'preparing', timestamp: new Date(Date.now() - 10*60000).toISOString(), rating: 0 },
-  { id: 'ORD_003', items: [{id: 23, name: 'Family Combo (4)', price: 49.99, quantity: 1}], total: 49.99, table: 'T3', captain: 'Arjun Singh', status: 'served', timestamp: new Date(Date.now() - 35*60000).toISOString(), rating: 5, feedback: 'Excellent taste!' },
-  { id: 'ORD_004', items: [{id: 15, name: 'Butter Chicken', price: 16.99, quantity: 2}, {id: 11, name: 'Garlic Naan', price: 4.99, quantity: 2}], total: 43.96, table: 'T4', captain: 'Arjun Singh', status: 'paid', timestamp: new Date(Date.now() - 60*60000).toISOString(), rating: 4, feedback: 'Very good!' },
-  { id: 'ORD_005', items: [{id: 4, name: 'Vegetable Dum Biryani', price: 16.99, quantity: 3}], total: 50.97, table: 'T1', captain: 'Arjun Singh', status: 'paid', timestamp: new Date(Date.now() - 120*60000).toISOString(), rating: 4.5, feedback: 'Great quality!' },
+  {
+    id: 'ORD_001',
+    items: [
+      { id: 1, name: 'Chicken Dum Biryani', price: 18.99, quantity: 2 },
+      { id: 6, name: 'Chicken Tikka', price: 14.99, quantity: 1 },
+    ],
+    total: 52.97,
+    table: 'T1',
+    captain: 'Arjun Singh',
+    status: 'pending',
+    timestamp: new Date(Date.now() - 5 * 60000).toISOString(),
+    rating: 0,
+  },
+  {
+    id: 'ORD_002',
+    items: [{ id: 2, name: 'Mutton Dum Biryani', price: 22.99, quantity: 1 }],
+    total: 22.99,
+    table: 'T2',
+    captain: 'Arjun Singh',
+    status: 'preparing',
+    timestamp: new Date(Date.now() - 10 * 60000).toISOString(),
+    rating: 0,
+  },
+  {
+    id: 'ORD_003',
+    items: [{ id: 23, name: 'Family Combo (4)', price: 49.99, quantity: 1 }],
+    total: 49.99,
+    table: 'T3',
+    captain: 'Arjun Singh',
+    status: 'served',
+    timestamp: new Date(Date.now() - 35 * 60000).toISOString(),
+    rating: 5,
+    feedback: 'Excellent taste!',
+  },
+  {
+    id: 'ORD_004',
+    items: [
+      { id: 15, name: 'Butter Chicken', price: 16.99, quantity: 2 },
+      { id: 11, name: 'Garlic Naan', price: 4.99, quantity: 2 },
+    ],
+    total: 43.96,
+    table: 'T4',
+    captain: 'Arjun Singh',
+    status: 'paid',
+    timestamp: new Date(Date.now() - 60 * 60000).toISOString(),
+    rating: 4,
+    feedback: 'Very good!',
+  },
+  {
+    id: 'ORD_005',
+    items: [{ id: 4, name: 'Vegetable Dum Biryani', price: 16.99, quantity: 3 }],
+    total: 50.97,
+    table: 'T1',
+    captain: 'Arjun Singh',
+    status: 'paid',
+    timestamp: new Date(Date.now() - 120 * 60000).toISOString(),
+    rating: 4.5,
+    feedback: 'Great quality!',
+  },
 ];
 
 export const OrderProvider = ({ children }) => {
@@ -115,7 +497,7 @@ export const OrderProvider = ({ children }) => {
       minStock: 5,
       manualAvailable: true,
       available: true,
-      recipe: MENU_RECIPES[item.id] || []
+      recipe: MENU_RECIPES[item.id] || [],
     }));
 
     return initialized;
@@ -146,7 +528,7 @@ export const OrderProvider = ({ children }) => {
   const refreshMenuAutoAvailability = (menuState, ingredientState) => {
     return menuState.map((item) => ({
       ...item,
-      available: resolveMenuAvailability(item, ingredientState)
+      available: resolveMenuAvailability(item, ingredientState),
     }));
   };
 
@@ -181,7 +563,8 @@ export const OrderProvider = ({ children }) => {
     });
 
     if (missingIngredient) {
-      const ingredientName = ingredients.find((i) => i.id === Number(missingIngredient[0]))?.name || 'Unknown';
+      const ingredientName =
+        ingredients.find((i) => i.id === Number(missingIngredient[0]))?.name || 'Unknown';
       return { error: `Ingredient ${ingredientName} is out of stock for the requested quantity.` };
     }
 
@@ -190,7 +573,7 @@ export const OrderProvider = ({ children }) => {
       if (consumption <= 0) return ing;
       return {
         ...ing,
-        stock: Math.max(0, ing.stock - consumption)
+        stock: Math.max(0, ing.stock - consumption),
       };
     });
 
@@ -201,7 +584,7 @@ export const OrderProvider = ({ children }) => {
       const newStock = Math.max(0, menuItem.stock - orderItem.quantity);
       return {
         ...menuItem,
-        stock: newStock
+        stock: newStock,
       };
     });
 
@@ -218,7 +601,7 @@ export const OrderProvider = ({ children }) => {
       status: 'pending',
       timestamp: new Date().toISOString(),
       rating: 0,
-      feedback: ''
+      feedback: '',
     };
 
     const newOrders = [...orders, newOrder];
@@ -271,7 +654,9 @@ export const OrderProvider = ({ children }) => {
       const row = lines[i].split(',').map((v) => v.trim());
       if (!row[0]) continue;
       const data = Object.fromEntries(headers.map((h, idx) => [h, row[idx] ?? '']));
-      const existing = updatedIngredients.find((ing) => ing.name.toLowerCase() === data.name.toLowerCase());
+      const existing = updatedIngredients.find(
+        (ing) => ing.name.toLowerCase() === data.name.toLowerCase()
+      );
       if (existing) {
         existing.stock = Number(data.stock) || existing.stock;
         existing.minStock = Number(data.minstock) || existing.minStock;
@@ -283,7 +668,7 @@ export const OrderProvider = ({ children }) => {
           unit: data.unit || 'unit',
           stock: Number(data.stock) || 0,
           minStock: Number(data.minstock) || 0,
-          reorderLeadDays: Number(data.reorderleaddays) || 2
+          reorderLeadDays: Number(data.reorderleaddays) || 2,
         });
       }
     }
@@ -295,13 +680,17 @@ export const OrderProvider = ({ children }) => {
 
   const exportIngredientsCSV = () => {
     const header = 'id,name,unit,stock,minStock,reorderLeadDays';
-    const rows = ingredients.map((ing) => `${ing.id},${ing.name},${ing.unit},${ing.stock},${ing.minStock},${ing.reorderLeadDays}`);
+    const rows = ingredients.map(
+      (ing) =>
+        `${ing.id},${ing.name},${ing.unit},${ing.stock},${ing.minStock},${ing.reorderLeadDays}`
+    );
     return [header, ...rows].join('\n');
   };
 
   const getReorderForecast = () => {
     const now = Date.now();
-    const start = orders.length > 0 ? Math.min(...orders.map((o) => new Date(o.timestamp).getTime())) : now;
+    const start =
+      orders.length > 0 ? Math.min(...orders.map((o) => new Date(o.timestamp).getTime())) : now;
     const days = Math.max(1, (now - start) / (1000 * 60 * 60 * 24));
 
     const usageMap = {};
@@ -318,13 +707,15 @@ export const OrderProvider = ({ children }) => {
     return ingredients.map((ing) => {
       const avgDailyUsage = usageMap[ing.id] ? usageMap[ing.id] / days : 0;
       const projectedRunDays = avgDailyUsage > 0 ? ing.stock / avgDailyUsage : Infinity;
-      const daysUntilReorder = Number.isFinite(projectedRunDays) ? Math.max(0, projectedRunDays - ing.reorderLeadDays) : Infinity;
+      const daysUntilReorder = Number.isFinite(projectedRunDays)
+        ? Math.max(0, projectedRunDays - ing.reorderLeadDays)
+        : Infinity;
       return {
         ...ing,
         avgDailyUsage,
         projectedRunDays,
         daysUntilReorder,
-        needsReorder: ing.stock <= ing.minStock || daysUntilReorder <= 0
+        needsReorder: ing.stock <= ing.minStock || daysUntilReorder <= 0,
       };
     });
   };
@@ -337,7 +728,7 @@ export const OrderProvider = ({ children }) => {
         return menuItem.recipe.reduce((recipeCost, rec) => {
           const ingredient = ingredients.find((ing) => ing.id === rec.ingredientId);
           if (!ingredient) return recipeCost;
-          return recipeCost + (rec.qty * (ingredient.unitCost || 0)) * item.quantity;
+          return recipeCost + rec.qty * (ingredient.unitCost || 0) * item.quantity;
         }, itemCost);
       }, 0);
       return acc + ingredientCost;
@@ -351,7 +742,7 @@ export const OrderProvider = ({ children }) => {
       revenue,
       costOfGoods,
       profit,
-      profitMargin: pcr
+      profitMargin: pcr,
     };
   };
 
@@ -370,22 +761,24 @@ export const OrderProvider = ({ children }) => {
   };
 
   return (
-    <OrderContext.Provider value={{
-      orders,
-      menu,
-      ingredients,
-      createOrder,
-      updateOrderStatus,
-      deleteOrder,
-      rateOrder,
-      updateMenuStock,
-      toggleMenuAvailability,
-      updateIngredientStock,
-      importIngredientsCSV,
-      exportIngredientsCSV,
-      getReorderForecast,
-      getFinancialMetrics
-    }}>
+    <OrderContext.Provider
+      value={{
+        orders,
+        menu,
+        ingredients,
+        createOrder,
+        updateOrderStatus,
+        deleteOrder,
+        rateOrder,
+        updateMenuStock,
+        toggleMenuAvailability,
+        updateIngredientStock,
+        importIngredientsCSV,
+        exportIngredientsCSV,
+        getReorderForecast,
+        getFinancialMetrics,
+      }}
+    >
       {children}
     </OrderContext.Provider>
   );

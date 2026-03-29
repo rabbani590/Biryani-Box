@@ -33,7 +33,7 @@ const Login = () => {
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-accent blur-3xl rounded-full translate-x-1/2 translate-y-1/2" />
       </div>
 
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         className="w-full max-w-lg glass p-10 rounded-lg relative z-10"
@@ -47,8 +47,8 @@ const Login = () => {
         </div>
 
         <div className="flex gap-4 mb-8">
-          {['owner', 'manager', 'captain'].map(role => (
-            <button 
+          {['owner', 'manager', 'captain'].map((role) => (
+            <button
               key={role}
               onClick={() => setActiveTab(role)}
               className={`flex-1 py-3 rounded-sm text-xs font-bold uppercase tracking-widest transition-all ${activeTab === role ? 'bg-primary text-white' : 'bg-white/5 border border-white/10 hover:border-primary/50'}`}
@@ -60,31 +60,38 @@ const Login = () => {
 
         <form onSubmit={handleLogin} className="space-y-6">
           <div className="space-y-2">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider block">ID / Email</label>
+            <label className="text-xs font-bold text-text-muted uppercase tracking-wider block">
+              ID / Email
+            </label>
             <div className="relative">
               <User className="absolute left-4 top-1/2 -translate-y-1/2 text-primary" size={18} />
-              <input 
-                type="text" 
+              <input
+                type="text"
                 defaultValue={`${activeTab}@biryanibox.com`}
                 readOnly
-                className="w-full bg-bg-main border border-white/10 p-4 pl-12 rounded-sm focus:border-primary outline-none" 
+                className="w-full bg-bg-main border border-white/10 p-4 pl-12 rounded-sm focus:border-primary outline-none"
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-xs font-bold text-text-muted uppercase tracking-wider block">Secure Token</label>
+            <label className="text-xs font-bold text-text-muted uppercase tracking-wider block">
+              Secure Token
+            </label>
             <div className="relative">
               <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-primary" size={18} />
-              <input 
-                type="password" 
+              <input
+                type="password"
                 placeholder="********"
-                className="w-full bg-bg-main border border-white/10 p-4 pl-12 rounded-sm focus:border-primary outline-none" 
+                className="w-full bg-bg-main border border-white/10 p-4 pl-12 rounded-sm focus:border-primary outline-none"
               />
             </div>
           </div>
 
-          <button type="submit" className="btn-primary w-full py-4 text-base flex items-center justify-center gap-3">
+          <button
+            type="submit"
+            className="btn-primary w-full py-4 text-base flex items-center justify-center gap-3"
+          >
             <ShieldCheck size={20} />
             AUTHENTICATE {activeTab.toUpperCase()}
           </button>

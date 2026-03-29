@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, User, Clock, Users, CheckCircle, AlertCircle, Phone, Mail, MapPin } from 'lucide-react';
+import {
+  Calendar,
+  User,
+  Clock,
+  Users,
+  CheckCircle,
+  AlertCircle,
+  Phone,
+  Mail,
+  MapPin,
+} from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useDemoData } from '../context/DemoDataContext';
@@ -14,12 +24,18 @@ const Reservations = () => {
       <Navbar />
       {/* Glow Effects */}
       <div className="absolute top-0 left-0 w-[1000px] h-[1000px] bg-primary/5 blur-[200px] rounded-full -translate-x-1/2 -translate-y-1/2" />
-      
+
       <div className="container relative z-10 px-6 max-w-6xl mx-auto mt-20">
         <div className="text-center mb-16">
-          <span className="text-primary font-black uppercase tracking-[0.4em] text-[12px] mb-4 block">Dining Experience</span>
-          <h1 className="text-5xl md:text-7xl font-black mb-6">Table <span className="text-primary">Reservations</span></h1>
-          <p className="text-lg text-text-muted max-w-2xl mx-auto">Book your perfect dining experience at Biryani Box</p>
+          <span className="text-primary font-black uppercase tracking-[0.4em] text-[12px] mb-4 block">
+            Dining Experience
+          </span>
+          <h1 className="text-5xl md:text-7xl font-black mb-6">
+            Table <span className="text-primary">Reservations</span>
+          </h1>
+          <p className="text-lg text-text-muted max-w-2xl mx-auto">
+            Book your perfect dining experience at Biryani Box
+          </p>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
@@ -56,17 +72,25 @@ const Reservations = () => {
                       </div>
                     </div>
                   </div>
-                  <div className={`px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 ${
-                    res.status === 'confirmed'
-                      ? 'bg-green-500/20 text-green-400'
-                      : 'bg-yellow-500/20 text-yellow-400'
-                  }`}>
-                    {res.status === 'confirmed' ? <CheckCircle size={16} /> : <AlertCircle size={16} />}
+                  <div
+                    className={`px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 ${
+                      res.status === 'confirmed'
+                        ? 'bg-green-500/20 text-green-400'
+                        : 'bg-yellow-500/20 text-yellow-400'
+                    }`}
+                  >
+                    {res.status === 'confirmed' ? (
+                      <CheckCircle size={16} />
+                    ) : (
+                      <AlertCircle size={16} />
+                    )}
                     {res.status.charAt(0).toUpperCase() + res.status.slice(1)}
                   </div>
                 </div>
                 {res.tableAssigned && (
-                  <div className="text-sm text-primary font-semibold">Table {res.tableAssigned}</div>
+                  <div className="text-sm text-primary font-semibold">
+                    Table {res.tableAssigned}
+                  </div>
                 )}
                 <p className="text-sm text-text-muted mt-2">{res.notes}</p>
               </motion.div>
@@ -104,7 +128,9 @@ const Reservations = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-text-muted text-sm mb-2">Table</p>
-                      <p className="font-bold text-primary">{selectedReservation.tableAssigned || 'TBD'}</p>
+                      <p className="font-bold text-primary">
+                        {selectedReservation.tableAssigned || 'TBD'}
+                      </p>
                     </div>
                   </div>
                   <div>
@@ -145,14 +171,45 @@ const Reservations = () => {
         >
           <h3 className="text-2xl font-bold mb-4">Make a New Reservation</h3>
           <form className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <input type="text" placeholder="Your Name" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" />
-            <input type="email" placeholder="Email" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" />
-            <input type="date" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-primary" />
-            <input type="time" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-primary" />
-            <input type="number" placeholder="Number of Guests" min="1" max="50" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" />
-            <input type="tel" placeholder="Phone Number" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" />
-            <textarea placeholder="Special Requests" rows="1" className="lg:col-span-2 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary resize-none" />
-            <button type="submit" className="lg:col-span-1 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-all">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+            />
+            <input
+              type="date"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-primary"
+            />
+            <input
+              type="time"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-primary"
+            />
+            <input
+              type="number"
+              placeholder="Number of Guests"
+              min="1"
+              max="50"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+            />
+            <textarea
+              placeholder="Special Requests"
+              rows="1"
+              className="lg:col-span-2 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary resize-none"
+            />
+            <button
+              type="submit"
+              className="lg:col-span-1 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-all"
+            >
               Reserve Table
             </button>
           </form>

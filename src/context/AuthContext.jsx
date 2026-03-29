@@ -14,7 +14,7 @@ const MOCK_USERS = {
     phone: '+1-555-0101',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Rajesh',
     joinDate: '2023-01-15',
-    restaurantName: 'Biryani Box Premium'
+    restaurantName: 'Biryani Box Premium',
   },
   manager: {
     id: 'manager_1',
@@ -24,7 +24,7 @@ const MOCK_USERS = {
     phone: '+1-555-0102',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Priya',
     joinDate: '2023-03-20',
-    managerSince: '2023-03-20'
+    managerSince: '2023-03-20',
   },
   captain: {
     id: 'captain_1',
@@ -34,7 +34,7 @@ const MOCK_USERS = {
     phone: '+1-555-0103',
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Arjun',
     joinDate: '2023-05-10',
-    tables: ['T1', 'T2', 'T3', 'T4']
+    tables: ['T1', 'T2', 'T3', 'T4'],
   },
   delivery: {
     id: 'delivery_1',
@@ -46,7 +46,7 @@ const MOCK_USERS = {
     joinDate: '2023-06-01',
     vehicleType: 'Motorcycle',
     rating: 4.8,
-    deliveries: 245
+    deliveries: 245,
   },
   customer: {
     id: 'customer_1',
@@ -58,8 +58,8 @@ const MOCK_USERS = {
     joinDate: '2024-01-10',
     address: '123 Main Street, NYC',
     loyaltyPoints: 850,
-    orderCount: 12
-  }
+    orderCount: 12,
+  },
 };
 
 export const AuthProvider = ({ children }) => {
@@ -79,9 +79,5 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('bb_user');
   };
 
-  return (
-    <AuthContext.Provider value={{ user, login, logout }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>;
 };

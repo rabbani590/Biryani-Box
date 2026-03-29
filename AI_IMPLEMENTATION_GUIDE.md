@@ -3,7 +3,9 @@
 ## Current Application Issues (AI Perspective)
 
 ### 1. ❌ No Backend/Database
+
 **Problem:**
+
 ```
 LocalStorage (Browser)
 ├─ Max 5-10MB storage
@@ -14,8 +16,9 @@ LocalStorage (Browser)
 ```
 
 **Solution:**
+
 ```
-Frontend (React) 
+Frontend (React)
     ↓
 Backend (Node.js/Express)
     ↓
@@ -27,7 +30,9 @@ Persistent, Scalable, Secure
 ---
 
 ### 2. ❌ No Data Analytics
+
 **Current State:**
+
 ```javascript
 // Only real-time data
 const totalRev = orders.reduce((sum, o) => sum + o.total, 0);
@@ -35,6 +40,7 @@ const totalRev = orders.reduce((sum, o) => sum + o.total, 0);
 ```
 
 **What We Need:**
+
 ```
 Historical Data Storage
     ↓
@@ -48,6 +54,7 @@ Actionable Insights
 ```
 
 **Example - Demand Forecast:**
+
 ```javascript
 // AI Model Input
 {
@@ -78,13 +85,16 @@ Actionable Insights
 ---
 
 ### 3. ❌ No Customer Intelligence
+
 **Current:**
+
 ```
 Customer → Order → Checkout
 (No history, no preferences, no personalization)
 ```
 
 **Improved:**
+
 ```
 Customer Profile
     ├─ Order History (20+ orders)
@@ -111,27 +121,28 @@ Personalized Offers
 ---
 
 ### 4. ❌ No Operational Intelligence
+
 **Inventory:**
+
 ```javascript
 // Currently: Static menu
-const menu = [
-  { id: 1, name: 'Chicken Dum Biryani', price: 18.99 }
-];
+const menu = [{ id: 1, name: 'Chicken Dum Biryani', price: 18.99 }];
 
 // Should be:
 const inventory = {
-  "Chicken Dum Biryani": {
+  'Chicken Dum Biryani': {
     stock: 45,
     reorderPoint: 10,
     leadTime: 2,
-    supplierCost: 12.50,
+    supplierCost: 12.5,
     wastePercentage: 5,
-    alertStatus: "Normal"
-  }
+    alertStatus: 'Normal',
+  },
 };
 ```
 
 **Staff Scheduling:**
+
 ```javascript
 // AI-Optimized Schedule
 {
@@ -165,12 +176,15 @@ const inventory = {
 ---
 
 ### 5. ❌ No Quality Control
+
 **Currently:**
+
 ```
 Order Created → Served → (No tracking)
 ```
 
 **AI Solution:**
+
 ```
 Order Created
     ↓
@@ -193,6 +207,7 @@ Anomaly Detection
 ## 🎯 AI Features to Implement
 
 ### Feature 1: Demand Forecasting
+
 ```
 Algorithm: ARIMA + Seasonal Decomposition
 Input: Historical orders, weather, events
@@ -206,6 +221,7 @@ Impact:
 ```
 
 ### Feature 2: Customer Segmentation
+
 ```
 Segments Created:
 1. Premium Customers (20% of customers, 60% of revenue)
@@ -219,6 +235,7 @@ Churn Risk Analysis:
 ```
 
 ### Feature 3: Recommendation Engine
+
 ```
 Methods:
 1. Collaborative Filtering (Your taste matches 500+ similar customers)
@@ -233,6 +250,7 @@ Recommendations:
 ```
 
 ### Feature 4: Delivery Optimization
+
 ```
 Optimization Factors:
 - Distance between pickup points
@@ -248,6 +266,7 @@ Output:
 ```
 
 ### Feature 5: Dynamic Pricing
+
 ```
 Price Adjustment Formula:
 BasePrice × DemandFactor × InventoryFactor × SegmentFactor
@@ -302,6 +321,7 @@ Action Layer
 ## 🚀 Implementation Phases
 
 ### Phase 1: Foundation (Weeks 1-4)
+
 ```
 Backend API
 ├─ User Management
@@ -324,6 +344,7 @@ Frontend Integration
 ```
 
 ### Phase 2: Intelligence (Weeks 5-8)
+
 ```
 Historical Analysis
 ├─ Aggregate past orders
@@ -345,6 +366,7 @@ Admin Dashboard
 ```
 
 ### Phase 3: Optimization (Weeks 9-12)
+
 ```
 Operational Features
 ├─ Staff scheduling
@@ -370,6 +392,7 @@ Customer Features
 ## 💾 Data Model Changes
 
 ### Current (localStorage):
+
 ```javascript
 {
   orders: [
@@ -380,6 +403,7 @@ Customer Features
 ```
 
 ### Enhanced (Database):
+
 ```javascript
 {
   users: {
@@ -412,6 +436,7 @@ Customer Features
 ## 📈 Success Metrics
 
 ### Before (Current State):
+
 ```
 Revenue: $10,000/month
 Customer Orders: 500/month
@@ -422,6 +447,7 @@ Staff Efficiency: 70%
 ```
 
 ### After (With AI Improvements):
+
 ```
 Revenue: $16,000-17,000/month ⬆️ 60-70%
 Customer Orders: 700-800/month ⬆️ 40-60%
@@ -436,6 +462,7 @@ Staff Efficiency: 85-90% ⬆️ 15-20%
 ## 🔐 Security & Privacy
 
 ### Data Protection
+
 - End-to-end encryption
 - GDPR compliance
 - Data anonymization
@@ -443,6 +470,7 @@ Staff Efficiency: 85-90% ⬆️ 15-20%
 - Audit logs
 
 ### ML Model Security
+
 - Adversarial attack prevention
 - Model validation
 - Explainability (understand why AI recommends)

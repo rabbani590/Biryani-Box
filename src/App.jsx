@@ -19,10 +19,10 @@ function App() {
       <Routes>
         {/* Landing Page */}
         <Route path="/" element={<Home />} />
-        
+
         {/* Staff Portal Login */}
         <Route path="/login" element={<Login />} />
-        
+
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/auth" element={<CustomerAuth />} />
@@ -31,24 +31,24 @@ function App() {
         <Route path="/gift-cards" element={<GiftCards />} />
         <Route path="/catering" element={<Catering />} />
         <Route path="/reservations" element={<Reservations />} />
-        
+
         {/* Management Dashboard Hub */}
-        <Route 
-          path="/dashboard" 
+        <Route
+          path="/dashboard"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/dashboard/*" 
+        <Route
+          path="/dashboard/*"
           element={
             <ProtectedRoute>
               <Dashboard />
             </ProtectedRoute>
-          } 
+          }
         />
 
         {/* Catch-all Redirect */}

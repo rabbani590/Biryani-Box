@@ -3,7 +3,18 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, Truck, Utensils, Star, CheckCircle, Calendar, Clock, MapPin, DollarSign, ChefHat } from 'lucide-react';
+import {
+  Users,
+  Truck,
+  Utensils,
+  Star,
+  CheckCircle,
+  Calendar,
+  Clock,
+  MapPin,
+  DollarSign,
+  ChefHat,
+} from 'lucide-react';
 import { useDemoData } from '../context/DemoDataContext';
 
 const Catering = () => {
@@ -20,9 +31,15 @@ const Catering = () => {
 
       <div className="container relative z-10 px-6 max-w-7xl mx-auto mt-20">
         <div className="text-center mb-16">
-          <span className="text-primary font-black uppercase tracking-[0.4em] text-[12px] mb-4 block">Bulk Orders</span>
-          <h1 className="text-5xl md:text-7xl font-black mb-6">Corporate <span className="text-primary">Catering</span></h1>
-          <p className="text-lg text-text-muted max-w-2xl mx-auto">Perfect for events from 50 to 500+ guests with customized menus and full service</p>
+          <span className="text-primary font-black uppercase tracking-[0.4em] text-[12px] mb-4 block">
+            Bulk Orders
+          </span>
+          <h1 className="text-5xl md:text-7xl font-black mb-6">
+            Corporate <span className="text-primary">Catering</span>
+          </h1>
+          <p className="text-lg text-text-muted max-w-2xl mx-auto">
+            Perfect for events from 50 to 500+ guests with customized menus and full service
+          </p>
         </div>
 
         {/* Current Orders */}
@@ -45,9 +62,13 @@ const Catering = () => {
                     <h3 className="font-bold text-lg mb-1">{order.eventType}</h3>
                     <p className="text-text-muted text-sm">{order.customerName}</p>
                   </div>
-                  <div className={`px-3 py-1 rounded-lg text-xs font-bold ${
-                    order.status === 'confirmed' ? 'bg-green-500/20 text-green-400' : 'bg-yellow-500/20 text-yellow-400'
-                  }`}>
+                  <div
+                    className={`px-3 py-1 rounded-lg text-xs font-bold ${
+                      order.status === 'confirmed'
+                        ? 'bg-green-500/20 text-green-400'
+                        : 'bg-yellow-500/20 text-yellow-400'
+                    }`}
+                  >
                     {order.status}
                   </div>
                 </div>
@@ -61,8 +82,8 @@ const Catering = () => {
                     {order.guestCount} guests
                   </div>
                   <div className="flex items-center gap-2 text-text-muted">
-                    <DollarSign size={16} className="text-primary" />
-                    ${order.totalPrice ? order.totalPrice.toFixed(2) : 'Quote pending'}
+                    <DollarSign size={16} className="text-primary" />$
+                    {order.totalPrice ? order.totalPrice.toFixed(2) : 'Quote pending'}
                   </div>
                 </div>
                 <button className="w-full py-2 bg-primary/20 text-primary font-bold rounded-lg hover:bg-primary/30 transition-all text-sm">
@@ -81,14 +102,50 @@ const Catering = () => {
         >
           <h3 className="text-2xl font-bold mb-6">Request a Quote</h3>
           <form className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <input type="text" placeholder="Your Name" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" required />
-            <input type="email" placeholder="Email" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" required />
-            <input type="date" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-primary" required />
-            <input type="number" placeholder="Number of Guests" min="50" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" required />
-            <input type="text" placeholder="Event Type" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" />
-            <input type="tel" placeholder="Phone Number" className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary" required />
-            <textarea placeholder="Special Requirements" rows="1" className="lg:col-span-2 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary resize-none" />
-            <button type="submit" className="lg:col-span-1 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-all">
+            <input
+              type="text"
+              placeholder="Your Name"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+              required
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+              required
+            />
+            <input
+              type="date"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white focus:outline-none focus:border-primary"
+              required
+            />
+            <input
+              type="number"
+              placeholder="Number of Guests"
+              min="50"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+              required
+            />
+            <input
+              type="text"
+              placeholder="Event Type"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+            />
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              className="px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary"
+              required
+            />
+            <textarea
+              placeholder="Special Requirements"
+              rows="1"
+              className="lg:col-span-2 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-text-muted focus:outline-none focus:border-primary resize-none"
+            />
+            <button
+              type="submit"
+              className="lg:col-span-1 py-3 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-all"
+            >
               Get Quote
             </button>
           </form>
@@ -100,7 +157,7 @@ const Catering = () => {
             { icon: Users, title: 'Custom Menus', desc: 'Tailored to your event' },
             { icon: Truck, title: 'Full Service Delivery', desc: 'On-time guarantee' },
             { icon: Utensils, title: 'Live Cooking', desc: 'Tandoor on-site available' },
-            { icon: Star, title: 'Expert Team', desc: '50-500+ guests capacity' }
+            { icon: Star, title: 'Expert Team', desc: '50-500+ guests capacity' },
           ].map((item, i) => (
             <motion.div
               key={i}

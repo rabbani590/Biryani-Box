@@ -85,6 +85,7 @@ Benefits:
 ## 🔧 Complete Tech Stack
 
 ### Frontend (Unchanged)
+
 ```
 React 19.2.4
 ├─ React Router (Navigation)
@@ -102,6 +103,7 @@ State Management:
 ### Backend (NEW)
 
 **Framework:**
+
 ```
 Node.js 18+ LTS
 └─ Express.js 4.18+
@@ -113,6 +115,7 @@ Node.js 18+ LTS
 ```
 
 **Real-time:**
+
 ```
 Socket.IO 4.5+
 ├─ Real-time notifications
@@ -122,6 +125,7 @@ Socket.IO 4.5+
 ```
 
 **Database:**
+
 ```
 PostgreSQL 14+
 ├─ Relational data
@@ -138,6 +142,7 @@ MongoDB (Optional)
 ```
 
 **Caching:**
+
 ```
 Redis 7+
 ├─ Session storage
@@ -147,6 +152,7 @@ Redis 7+
 ```
 
 **Job Queue:**
+
 ```
 Bull/RabbitMQ
 ├─ Background jobs
@@ -159,6 +165,7 @@ Bull/RabbitMQ
 ### Machine Learning (NEW)
 
 **Python ML Stack:**
+
 ```
 Python 3.9+
 ├─ FastAPI (ML API server)
@@ -201,6 +208,7 @@ Analytics:
 ## 📊 Database Schema
 
 ### Users Table
+
 ```sql
 CREATE TABLE users (
   id UUID PRIMARY KEY,
@@ -222,6 +230,7 @@ CREATE TABLE users (
 ```
 
 ### Orders Table
+
 ```sql
 CREATE TABLE orders (
   id UUID PRIMARY KEY,
@@ -246,6 +255,7 @@ CREATE TABLE orders (
 ```
 
 ### Inventory Table
+
 ```sql
 CREATE TABLE inventory (
   id UUID PRIMARY KEY,
@@ -270,6 +280,7 @@ CREATE TABLE inventory (
 ```
 
 ### Analytics Events Table
+
 ```sql
 CREATE TABLE analytics_events (
   id UUID PRIMARY KEY,
@@ -287,6 +298,7 @@ CREATE TABLE analytics_events (
 ```
 
 ### Predictions Table
+
 ```sql
 CREATE TABLE predictions (
   id UUID PRIMARY KEY,
@@ -305,6 +317,7 @@ CREATE TABLE predictions (
 ## 🔄 API Endpoints Architecture
 
 ### User Management
+
 ```
 POST   /api/auth/register        - Register new user
 POST   /api/auth/login           - User login
@@ -315,6 +328,7 @@ POST   /api/auth/refresh         - Refresh token
 ```
 
 ### Orders
+
 ```
 POST   /api/orders               - Create order
 GET    /api/orders               - List orders (paginated)
@@ -325,6 +339,7 @@ GET    /api/orders/:id/tracking  - Real-time tracking
 ```
 
 ### Analytics & Predictions
+
 ```
 GET    /api/analytics/dashboard  - Dashboard data
 GET    /api/analytics/revenue    - Revenue analytics
@@ -335,6 +350,7 @@ GET    /api/insights/top-items   - Top products
 ```
 
 ### Recommendations
+
 ```
 GET    /api/recommendations/personalized - ML recommendations
 GET    /api/recommendations/popular      - Popular items
@@ -343,6 +359,7 @@ POST   /api/recommendations/feedback     - Feedback for ML
 ```
 
 ### Admin
+
 ```
 GET    /api/admin/users          - List users
 GET    /api/admin/orders         - All orders
@@ -356,6 +373,7 @@ GET    /api/admin/reports        - Generate reports
 ## 🔐 Security Architecture
 
 ### Authentication
+
 ```
 ├─ JWT tokens (expire in 1 hour)
 ├─ Refresh tokens (expire in 30 days)
@@ -365,6 +383,7 @@ GET    /api/admin/reports        - Generate reports
 ```
 
 ### Authorization
+
 ```
 ├─ Role-based access control (RBAC)
 ├─ Permission matrix
@@ -373,6 +392,7 @@ GET    /api/admin/reports        - Generate reports
 ```
 
 ### Data Security
+
 ```
 ├─ HTTPS/TLS encryption
 ├─ SQL injection prevention
@@ -473,6 +493,7 @@ GET    /api/admin/reports        - Generate reports
 ## 📋 Implementation Checklist
 
 ### Backend Infrastructure
+
 - [ ] Set up Node.js/Express server
 - [ ] Configure PostgreSQL database
 - [ ] Set up Redis caching
@@ -483,6 +504,7 @@ GET    /api/admin/reports        - Generate reports
 - [ ] Configure CORS
 
 ### ML Integration
+
 - [ ] Set up Python FastAPI
 - [ ] Create data pipeline
 - [ ] Implement demand forecasting
@@ -492,6 +514,7 @@ GET    /api/admin/reports        - Generate reports
 - [ ] Add monitoring
 
 ### Frontend Integration
+
 - [ ] Update API calls
 - [ ] Implement WebSocket connection
 - [ ] Add real-time updates
@@ -500,6 +523,7 @@ GET    /api/admin/reports        - Generate reports
 - [ ] Implement caching strategy
 
 ### DevOps & Deployment
+
 - [ ] Dockerize services
 - [ ] Set up CI/CD pipeline
 - [ ] Configure monitoring
@@ -512,6 +536,7 @@ GET    /api/admin/reports        - Generate reports
 ## 💡 Key Insights
 
 **Current State:**
+
 - Single-tier architecture (frontend only)
 - No backend processing
 - No data persistence
@@ -519,6 +544,7 @@ GET    /api/admin/reports        - Generate reports
 - No ML models
 
 **Improved State:**
+
 - Multi-tier architecture
 - Scalable backend
 - Persistent database
@@ -528,6 +554,7 @@ GET    /api/admin/reports        - Generate reports
 - Production-ready security
 
 **Business Impact:**
+
 - 60-70% revenue increase
 - 20-30% cost reduction
 - Better customer experience
