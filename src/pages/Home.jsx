@@ -246,7 +246,14 @@ const MenuCategories = () => {
   });
 
   const getMenuItemImage = (item) => {
-    if (item.image && /\.(png|jpe?g|svg)$/i.test(item.image)) return item.image;
+    const imageMap = {
+      'heroBiryani': heroBiryani,
+      'muttonBiryani': muttonBiryani,
+      'chickenTikka': chickenTikka,
+      'rasmalai': rasmalai,
+    };
+    
+    if (item.image && imageMap[item.image]) return imageMap[item.image];
     if (item.category === 'Biryani') return heroBiryani;
     if (item.category === 'Appetizers') return chickenTikka;
     if (item.category === 'Dessert') return rasmalai;

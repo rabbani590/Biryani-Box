@@ -20,10 +20,23 @@ const POS = ({ user }) => {
 
   const categories = ['Biryani', 'Appetizers', 'Combos', 'Desserts'];
 
-  const getCategoryImage = (name) => {
-    if (name.includes('Mutton')) return muttonBiryani;
-    if (name.includes('Chicken Tikka')) return chickenTikka;
-    if (name.includes('Rasmalai')) return rasmalai;
+  const getCategoryImage = (item) => {
+    const imageMap = {
+      'heroBiryani': heroBiryani,
+      'muttonBiryani': muttonBiryani,
+      'chickenTikka': chickenTikka,
+      'rasmalai': rasmalai,
+    };
+    
+    // Handle item object with image property
+    if (item.image && imageMap[item.image]) return imageMap[item.image];
+    
+    // Fallback for category-based matching
+    if (item.category === 'Biryani') return heroBiryani;
+    if (item.category === 'Appetizers') return chickenTikka;
+    if (item.category === 'Dessert') return rasmalai;
+    if (item.category === 'Combos') return muttonBiryani;
+    
     return heroBiryani;
   };
 
@@ -123,7 +136,7 @@ const POS = ({ user }) => {
                 <div className="flex-1">
                   <div className="aspect-video bg-bg-main rounded-2xl mb-4 overflow-hidden relative border border-white/5">
                     <img
-                      src={getCategoryImage(item.name)}
+                      src={getCategoryImage(item)}
                       alt={item.name}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
@@ -182,7 +195,7 @@ const POS = ({ user }) => {
                 className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10 group hover:border-primary/20 transition-all"
               >
                 <div className="w-12 h-12 rounded-xl bg-bg-main overflow-hidden border border-white/10 shrink-0">
-                  <img src={getCategoryImage(item.name)} className="w-full h-full object-cover" />
+                  <img src={getCategoryImage(item)} className="w-full h-full object-cover" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <h4 className="text-xs font-bold text-white truncate">{item.name}</h4>
